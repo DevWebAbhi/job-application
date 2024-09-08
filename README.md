@@ -2,12 +2,15 @@
 
 This project is a backend server for a job portal system built using Express.js and MySQL. It handles functionalities like user registration, job applications, interviews, and more, leveraging stored procedures for database operations. This README will guide you through the project's structure, setup, and how to run the backend.
 
+### Deloyed Link 
+https://job-application-s70v.onrender.com
+
 ## API Endpoints
 
-- ** Base URL: ** http://localhost:8080
+- ** Base URL: ** https://job-application-s70v.onrender.com
 
 
-- ** Signup URL(POST) ** http://localhost:8080/user/signup
+- ** Signup URL(POST) ** https://job-application-s70v.onrender.com/user/signup
 
  ### Store Procedure
 
@@ -39,7 +42,7 @@ BEGIN
 END
 
 
-- ** Login URL(POST) ** http://localhost:8080/user/login
+- ** Login URL(POST) ** https://job-application-s70v.onrender.com/user/login
 
  ### Store Procedure
 
@@ -80,7 +83,7 @@ BEGIN
 END
 
 
-- ** Create Job(POST) **  http://localhost:8080/Jobs/create
+- ** Create Job(POST) **  https://job-application-s70v.onrender.com/Jobs/create
 
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "CreateJob"(
     IN p_email VARCHAR(100),
