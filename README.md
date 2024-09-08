@@ -20,18 +20,18 @@ BEGIN
     DECLARE email_exists INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- Handle SQL exceptions
+         Handle SQL exceptions
         SELECT 'SQLException' AS Message;
     END;
 
-    -- Check if the email already exists in the Users table
+     Check if the email already exists in the Users table
     SELECT COUNT(*) INTO email_exists FROM Users WHERE Email = p_email;
 
     IF email_exists > 0 THEN
-        -- Email already exists
+         Email already exists
         SELECT 'Email already registered' AS Message;
     ELSE
-        -- Insert the new user into the Users table with the token
+         Insert the new user into the Users table with the token
         INSERT INTO Users (Name, Email, Password, Token)
         VALUES (p_username, p_email, p_password, null);
         SELECT 'Signup successful' AS Message;
@@ -53,11 +53,11 @@ BEGIN
     DECLARE password_correct INT;
     DECLARE EXIT HANDLER FOR SQLEXCEPTION
     BEGIN
-        -- Handle SQL exceptions
+         Handle SQL exceptions
         SELECT 'SQLException' AS Message;
     END;
 
-    -- Check if the email exists and the password is correct
+     Check if the email exists and the password is correct
     BEGIN
         SELECT COUNT(*) INTO user_exists 
         FROM Users 
@@ -99,27 +99,27 @@ BEGIN
         SELECT 'SQLException' AS Message;
     END;
 
-    -- Check if the user is an admin
+     Check if the user is an admin
     SELECT Admin INTO is_admin
     FROM Users
     WHERE Email = p_email;
 IF is_admin = 0 THEN
-        -- User is not an admin
+         User is not an admin
         SELECT 'Not an admin' AS Message;
     ELSE
-        -- Check if the token matches
+         Check if the token matches
         SELECT Token INTO db_token
         FROM Users
         WHERE Email = p_email;
 
         IF db_token = p_token THEN
-            -- User is an admin and token matches, proceed to create the job
+             User is an admin and token matches, proceed to create the job
             
             INSERT INTO Jobs (Title,Department, Description,OpenDate )
             VALUES (p_title,p_department, p_description, p_openDate);
             SELECT 'Job created successfully' AS Message;
         ELSE
-            -- Token does not match
+             Token does not match
             SELECT 'Unauthorized' AS Message;
         END IF;
     END IF;
