@@ -2,6 +2,14 @@
 
 This project is a backend server for a job portal system built using Express.js and MySQL. It handles functionalities like user registration, job applications, interviews, and more, leveraging stored procedures for database operations. This README will guide you through the project's structure, setup, and how to run the backend.
 
+## Technologies Used
+
+** Nodejs**
+**Expressjs**
+**Zod: ** For Validation
+**MySQL** 
+
+
 ### Deloyed Link 
 https://job-application-s70v.onrender.com
 
