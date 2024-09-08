@@ -5,7 +5,7 @@ const { executeQuery } = require("./dbConfig");
 
 const addJobRouter = express.Router();
 
-addJobRouter.post("/",async(req,res)=>{
+addJobRouter.post("/create",async(req,res)=>{
 
     try {
         const {jobTitle ,department , description , openDate } = req.body;
@@ -41,6 +41,32 @@ addJobRouter.post("/",async(req,res)=>{
                 return res.status(401).send({message:"Unauthorized"}); 
             }else{
                 return res.status(200).send({message:"Job created successfully"});
+            }
+        }else{
+            return res.status(500).send({message:"Internal server error"});
+        }
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send({message:"Internal server error"});
+    }
+})
+
+
+addJobRouter.get("/",async(req,res)=>{
+
+    try {
+        
+          const job = await executeQuery({
+            query:"CALL JobApplicationManager.GetJob()",
+            values:[]
+        });
+        console.log(job)
+        if(job && job[0] && job[0][0]){
+            const message = job[0][0].Message;
+            if(message == "SQLException"){
+                return res.status(500).send({message:"Database error"});
+            }else{
+                return res.status(200).send({message:"Job fetched successfully",jobs:job[0]});
             }
         }else{
             return res.status(500).send({message:"Internal server error"});

@@ -3,7 +3,8 @@ const cors = require("cors");
 require("dotenv").config();
 const { getPool } = require("./dbConfig");  
 const userRouter = require("./user");
-const addJobRouter = require("./addJob");
+const addJobRouter = require("./Job");
+const jobApplication = require("./jobApplication");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -18,7 +19,9 @@ app.get("/", (req, res) => {
 
 app.use("/user",userRouter);
 
-app.use("/addJob",addJobRouter);
+app.use("/Jobs",addJobRouter);
+
+app.use("/jobApplication",jobApplication);
 
 async function testDatabaseConnection() {
     const pool = getPool();
