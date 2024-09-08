@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 const { getPool } = require("./dbConfig");  
-
+const userRouter = require("./user");
+const addJobRouter = require("./addJob");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -15,6 +16,9 @@ app.get("/", (req, res) => {
     return res.status(200).send({ message: "This is job portal backend" });
 });
 
+app.use("/user",userRouter);
+
+app.use("/addJob",addJobRouter);
 
 async function testDatabaseConnection() {
     const pool = getPool();
