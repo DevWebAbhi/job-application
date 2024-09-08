@@ -4,10 +4,14 @@ This project is a backend server for a job portal system built using Express.js 
 
 ## Technologies Used
 
-** Nodejs**
-**Expressjs**
-**Zod: ** For Validation
-**MySQL** 
+- ** Nodejs**
+- **Expressjs**
+- **Zod: ** For Validation
+- **MySQL** 
+
+### Postman Collection URL
+
+https://api.postman.com/collections/36672306-4d439b86-87a4-4d22-95f3-434ae09a981e?access_key=PMAT-01J796ZM46MTWSGKSDNP4PJZB1
 
 
 ### Deloyed Link 
