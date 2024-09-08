@@ -84,7 +84,7 @@ jobApplication.get("/",async(req,res)=>{
 })
 
 
-jobApplication.patch("/",async(req,res)=>{
+jobApplication.patch("/updateStatus",async(req,res)=>{
     try {
         const {applicationID} = req.query;
         const {status} = req.body;
@@ -118,6 +118,42 @@ jobApplication.patch("/",async(req,res)=>{
             }else
             {
                 return res.status(200).send({message:"Application Updated",applications:job[0]});
+            }
+        }else{
+            return res.status(500).send({message:"Internal server error"});
+        }
+
+    } catch (error) {
+        return res.status(500).send({message:"Internal server error"});
+    }
+})
+
+
+jobApplication.delete("/deleteApplication",async(req,res)=>{
+    try {
+        const {applicationID} = req.query;
+        const {status} = req.body;
+        console.log(req.query);
+        const token = req.headers.authorization.split(" ")[1];
+        console.log(token)
+        const decoded = jwt.verify(token, process.env.JWTSecreat);
+        console.log(decoded)
+        const job = await executeQuery({
+            query:"CALL JobApplicationManager.DeleteApplicant(?,?,?)",
+            values:[decoded.userDetails.email,token,applicationID]
+        });
+        console.log(job)
+        if(job && job[0] && job[0][0]){
+            const message = job[0][0].Message;
+            if(message == "SQLException"){
+                return res.status(500).send({message:"Database error"});
+            }else if (message == "Unauthorized"){
+                return res.status(401).send({message:"Unauthorized"}); 
+            }else if(message == "Not an admin"){
+                return res.status(401).send({message:"Not an admin"}); 
+            }else
+            {
+                return res.status(200).send({message:"Application Deleted"});
             }
         }else{
             return res.status(500).send({message:"Internal server error"});

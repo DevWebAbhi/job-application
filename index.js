@@ -5,6 +5,7 @@ const { getPool } = require("./dbConfig");
 const userRouter = require("./user");
 const addJobRouter = require("./Job");
 const jobApplication = require("./jobApplication");
+const interview = require("./interview");
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -22,6 +23,8 @@ app.use("/user",userRouter);
 app.use("/Jobs",addJobRouter);
 
 app.use("/jobApplication",jobApplication);
+
+app.use("/interview",interview);
 
 async function testDatabaseConnection() {
     const pool = getPool();
