@@ -132,7 +132,6 @@ jobApplication.patch("/updateStatus",async(req,res)=>{
 jobApplication.delete("/deleteApplication",async(req,res)=>{
     try {
         const {applicationID} = req.query;
-        const {status} = req.body;
         console.log(req.query);
         const token = req.headers.authorization.split(" ")[1];
         console.log(token)
