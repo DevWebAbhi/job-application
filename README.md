@@ -114,7 +114,7 @@ The deployed link is: https://job-application-s70v.onrender.com
 ## Stored Procedures
 ---------------------
 
-### CreateInterviews
+### Create Interviews
 
 ```
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "CreateInterviews"(
