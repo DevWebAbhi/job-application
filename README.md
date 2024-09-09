@@ -9,6 +9,14 @@ This project is a backend server for a job portal system built using Express.js 
 - **Zod: ** For Validation
 - **MySQL** 
 
+
+## MySQL DB Dump
+
+Link: - https://drive.google.com/drive/folders/1QFLw_O3aKP2XhwkCWHoufQzc-bqrGaCs?usp=sharing
+
+
+This above link does not includes Store Procedures because it's a dump of deployed db in Aiven(DB Deplyement plateform) where it not exports the SP in db dump.
+
 ### Postman Collection URL
 
 https://api.postman.com/collections/36672306-4d439b86-87a4-4d22-95f3-434ae09a981e?access_key=PMAT-01J796ZM46MTWSGKSDNP4PJZB1
@@ -140,3 +148,58 @@ IF is_admin = 0 THEN
     END IF;
     
 END
+
+-** get Job(GET) **  https://job-application-s70v.onrender.com/Jobs
+```
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "GetJob"(
+    
+)
+BEGIN
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SELECT 'SQLException' AS Message;
+    END;
+	SELECT * FROM Jobs;
+    
+   
+    
+END
+```
+
+-** Create Job Application (POST) **  https://job-application-s70v.onrender.com/create
+
+```
+
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "CreateJobApplication"(
+    IN p_email VARCHAR(100),
+    IN p_token VARCHAR(255),
+    IN p_jobid VARCHAR(255),
+    IN p_name VARCHAR(100),
+    IN p_resumelink VARCHAR(255),
+     IN p_status VARCHAR(30)
+)
+BEGIN
+    DECLARE db_token VARCHAR(255);
+
+    DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    BEGIN
+        SELECT 'SQLException' AS Message;
+    END;
+        SELECT Token INTO db_token
+        FROM Users
+        WHERE Email = p_email;
+
+        IF db_token = p_token THEN
+            
+            INSERT INTO Applicants (JobID,Name, Email,ResumeLink,Status )
+            VALUES (p_jobid,p_name, p_email, p_resumelink,p_status);
+            SELECT 'Application created successfully' AS Message;
+        ELSE
+            -- Token does not match
+            SELECT 'Unauthorized' AS Message;
+        END IF;
+    
+END
+
+```
