@@ -33,6 +33,7 @@ https://job-application-s70v.onrender.com
 - ** Signup URL(POST) ** https://job-application-s70v.onrender.com/user/signup
 
  ### Store Procedure
+```
 
  CREATE DEFINER="avnadmin"@"%" PROCEDURE "Signup"(
     IN p_username VARCHAR(50),
@@ -61,11 +62,12 @@ BEGIN
     END IF;
 END
 
+```
 
 - ** Login URL(POST) ** https://job-application-s70v.onrender.com/user/login
 
  ### Store Procedure
-
+```
 
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "Login"(
     IN p_email VARCHAR(100),
@@ -101,10 +103,12 @@ BEGIN
         END IF;
     END;
 END
-
+```
 
 - ** Create Job(POST) **  https://job-application-s70v.onrender.com/Jobs/create
 
+ ### Store Procedure
+```
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "CreateJob"(
     IN p_email VARCHAR(100),
     IN p_token VARCHAR(1024),
@@ -148,8 +152,10 @@ IF is_admin = 0 THEN
     END IF;
     
 END
-
+```
 -** get Job(GET) **  https://job-application-s70v.onrender.com/Jobs
+ ### Store Procedure
+
 ```
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "GetJob"(
     
@@ -169,6 +175,8 @@ END
 
 -** Create Job Application (POST) **  https://job-application-s70v.onrender.com/create
 
+
+ ### Store Procedure
 ```
 
 CREATE DEFINER="avnadmin"@"%" PROCEDURE "CreateJobApplication"(
